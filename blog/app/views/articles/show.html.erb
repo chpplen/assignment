@@ -1,12 +1,30 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @article.text %>
-</p>
+<% if current_user %>
 
-<%= link_to 'Back', articles_path %>
-| <%= link_to 'Edit', edit_article_path(@article) %>
+  <% if current_user.id ==  @article.userid %>
+    <p>
+	  <strong>Title:</strong>
+	  <%= @article.title %>
+	</p>
+	 
+	<p>
+	  <strong>Text:</strong>
+	  <%= @article.text %>
+	</p>
+	 
+	<%= link_to 'Back', articles_path %>
+	| <%= link_to 'Edit', edit_article_path(@article) %>
+  <% else %>
+    <script type="text/javascript">
+      window.location.href="/articles" 
+    </script>
+
+  <% end %>
+	
+
+<% else %>
+  <script type="text/javascript">
+    window.location.href="/articles" 
+  </script>
+
+
+<% end %> 

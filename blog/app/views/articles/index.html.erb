@@ -1,6 +1,8 @@
 <h1>Listing articles</h1>
 
-<%= link_to 'New article', new_article_path %>
+<% if current_user %>
+  <%= link_to 'New article', new_article_path %>
+<% end %>
  
 <table>
   <tr>
@@ -13,10 +15,14 @@
     <tr>
       <td><%= article.title %></td>
       <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% if current_user %>
+        <% if current_user.id ==  article.userid %>
+          <td><%= link_to 'Show', article_path(article) %></td>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article_path(article),
+                        method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      <% end %>
     </tr>
   <% end %>
 </table>
