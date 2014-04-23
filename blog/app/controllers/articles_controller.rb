@@ -43,6 +43,7 @@ class ArticlesController < ApplicationController
     else
       render 'new'
     end
+  end
 
 	 
   private
